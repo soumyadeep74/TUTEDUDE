@@ -1,0 +1,31 @@
+mkdir test_dir
+ls
+touch test_dir/example.txt
+ls -l test_dir/
+mv test_dir/example.txt test_dir/renamed_example.txt
+ls -l test_dir/
+
+cat /etc/passwd
+head -5 /etc/passwd
+tail -5 /etc/passwd
+
+grep -i root /etc/passwd
+
+zip test_dir.zip test_dir/
+unzip test_dir.zip -d unzipped_dir/
+ls -ltr unzipped_dir/
+ls -l unzipped_dir/test_dir/
+cd test_dir/
+
+
+wget https://example.com/sample.txt
+wget https://gist.githubusercontent.com/Talha-Altair/b8a27d2b45add1dd7658fd34fa1968db/raw/bc45208c96df65e8e659c04e7d1f1bb54ec5b7e2/linux_commands.txt
+
+
+touch secure.txt
+ls -l secure.txt 
+chmod u-w secure.txt 
+
+export MY_VAR="Hello, Linux!"
+echo $MY_VAR
+env | grep -i MY_VAR

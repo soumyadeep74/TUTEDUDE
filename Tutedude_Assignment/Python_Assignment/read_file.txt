@@ -1,0 +1,4 @@
+this is a sample file 
+open the file
+read the content
+end of file
