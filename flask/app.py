@@ -1,22 +1,17 @@
+import pymongo
+import os
 from flask import Flask, request, render_template
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import pymongo
-import os
+from dotenv import load_dotenv
 
-# MongoDB connection URI
-uri = "mongodb+srv://test:abcd1234@cluster0.sdyhpi5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
-# Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
-
-# Ping to confirm connection
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print(e)
+load_dotenv()
+MONGO_URI = os.getenv('MONGO_URI')
+client = pymongo.MongoClient(MONGO_URI, server_api=ServerApi('1'))
+# Ensure the connection is established
+db = client.test
+collection = db['test_collection']
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -28,8 +23,11 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    name = request.form.get('name')
-    return f"Welcome {name}! to demo page.<br>You have submitted the form successfully."
+    form_data = request.form.to_dict()
+    collection.insert_one(form_data)  # Save form data to MongoDB
+    return render_template('success.html', data=form_data)
+    #name = request.form.get('name')
+    #return f"Welcome {name}! to demo page.<br>You have submitted the form successfully."
 
 # Optional routes (currently commented out for clarity)
 
