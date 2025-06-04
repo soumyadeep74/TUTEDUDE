@@ -1,0 +1,12 @@
+TASK - 2
+    git checkout -b tutedude_new
+    vi app.py
+    git add .
+    git commit -m "modified file"
+    git push origin tutedude_new
+    git checkout main
+    git merge tutedude_new
+    cat app.py
+    git add .
+    git commit -m "Merged tutedude_new into main"
+    git push
