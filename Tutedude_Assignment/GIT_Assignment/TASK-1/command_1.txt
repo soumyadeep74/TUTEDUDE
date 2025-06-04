@@ -1,0 +1,21 @@
+TASK-1
+
+    git clone git@github.com:soumyadeep74/Tute_Dude.git
+    cd Tute_Dude/
+    echo "# Tute_Dude" >> README.md
+    git add .
+    git commit -m "first commit"
+    git push
+    git status
+    git checkout -b flask_copy
+    cp -pr /c/Users/soumy/TUTEDUDE/Tutedude_Assignment/FLASK_Assignment/TASK-1/app.py .
+    cp -pr /c/Users/soumy/TUTEDUDE/Tutedude_Assignment/FLASK_Assignment/TASK-1/data.json .
+    git status
+    git add .
+    git commit -m "adding flask copy file"
+    git push
+    git push origin flask_copy
+    git checkout main
+    git merge flask_copy
+    git commit -m "adding file"
+    git push
