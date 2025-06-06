@@ -1,0 +1,32 @@
+TASK-4:
+
+git checkout master_1
+cd templates/
+vi todo.html
+git add . ; git commit -m "Add Item ID field to To-Do form" ; git push
+git add . ; git commit -m "Add Item ID field to To-Do form" ; git push origin master_1
+vi todo.html
+git add . ; git commit -m "Add Item UUID field to To-Do form" ; git push origin master_1
+vi todo.html
+git add . ; git commit -m "Add Item HASH field to To-Do form" ; git push origin master_1
+git checkout main
+git merge master_1
+git status
+git push
+git log --oneline
+history
+git reset --soft 3708396
+ls
+cat todo.html
+git status
+git stage
+git stagged
+git diff --staged
+git commit -m "Keep only Item ID field in form after reset"
+git push --force origin main
+git checkout master_1
+git rebase main
+git status
+git add .
+git commit -am "add" ; git push
+git push origin master_1
