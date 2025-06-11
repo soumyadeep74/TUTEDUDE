@@ -1,0 +1,16 @@
+Create two folder frontend and backend and then in frontend folder using Express and Node.js. which will take name,password & email id and store it into file called names.txt in /backend folder.Configure the form to send a request to the Flask backend.Backend (Flask):
+Use the Flask backend to handle the form submission and process the data.
+Folder Structure:
+Organize the project with separate folders for the frontend and backend.
+Docker Configuration:
+Create a Dockerfile for both the frontend and backend.
+Write a .yaml file (Docker Compose) to connect both services in the same network.
+Upload both images to docker hub and push your whole code to github and add the node_modules and other non required files(.vscode) in .gitignore
+
+
+
+-----
+
+
+
+Create a frontend using Express and Node.js. which will take name,password & email id and store it into file called names.txt in /backend folder
