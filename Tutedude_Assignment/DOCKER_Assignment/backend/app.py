@@ -13,7 +13,8 @@ def submit():
     with open('names.txt', 'a') as f:
         f.write(f'Name: {name}, Email: {email}, Password: {password}\n')
 
-    return render_template('success.html')
+    #return render_template('success.html')
+    return 'Data saved successfully!', 200
 
 @app.route('/view', methods=['GET'])
 def view():
