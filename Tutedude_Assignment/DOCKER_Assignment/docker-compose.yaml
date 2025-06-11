@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   frontend:
+    image: app-frontend 
     build:
       context: ./frontend
     ports:
@@ -12,6 +13,7 @@ services:
       - app-network
 
   backend:
+    image: app-backend
     build:
       context: ./backend
     ports:
