@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'templates')));
 
 app.post('/submit', (req, res) => {
     // Redirect the POST request to the Flask backend
-    res.redirect(307, 'http://localhost:5000/submit');
+    res.redirect(307, 'http://backend:5000/submit');
 });
 
 app.listen(port, () => {
