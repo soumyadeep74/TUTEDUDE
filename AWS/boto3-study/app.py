@@ -7,7 +7,7 @@ load_dotenv()
 ACCESS_KEY_ID = os.getenv("ACCESS_KEY_ID")
 SECRET_ACCESS_KEY = os.getenv("SECRET_ACCESS_KEY")
 #create a s3 client
-s3 = boto3.resource('s3', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key=SECRET_ACCESS_KEY)
+#s3 = boto3.resource('s3', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key=SECRET_ACCESS_KEY)
 
 #BUCKET_NAME = 'course-bucket-2-tute'
 
@@ -20,6 +20,12 @@ s3 = boto3.resource('s3', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key
 #download a file
 #s3.Bucket(BUCKET_NAME).download_file('abc/def/a.txt.txt', 'b.txt')
 #upload a new file
-for bucket in s3.buckets.all():
-   location = s3.meta.client.get_bucket_location(Bucket=bucket.name)['LocationConstraint']
-   print(bucket.name, location)
+#for bucket in s3.buckets.all():
+  # location = s3.meta.client.get_bucket_location(Bucket=bucket.name)['LocationConstraint']
+  # print(bucket.name, location)
+
+#AWS param store
+ssm = boto3.client('ssm', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key=SECRET_ACCESS_KEY)
+
+response = ssm.get_parameter(Name='test', wit)
+
