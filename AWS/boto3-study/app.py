@@ -18,7 +18,7 @@ BUCKET_NAME = 'course-bucket-2-tute'
 #s3.Bucket(BUCKET_NAME).delete()
 
 #download a file
-s3.Bucket(BUCKET_NAME).download_file('abc/def/a.txt.txt', 'b.txt')
+#s3.Bucket(BUCKET_NAME).download_file('abc/def/a.txt.txt', 'b.txt')
 #upload a new file
 #for bucket in s3.buckets.all():
    # location = s3.meta.client.get_bucket_location(Bucket=bucket.name)['LocationConstraint']
