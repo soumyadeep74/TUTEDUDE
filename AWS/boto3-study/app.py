@@ -25,7 +25,8 @@ SECRET_ACCESS_KEY = os.getenv("SECRET_ACCESS_KEY")
   # print(bucket.name, location)
 
 #AWS param store
-ssm = boto3.client('ssm', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key=SECRET_ACCESS_KEY)
+ssm = boto3.client('ssm', region_name='ap-south-1', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key=SECRET_ACCESS_KEY)
 
-response = ssm.get_parameter(Name='test', wit)
+response = ssm.get_parameter(Name='test', WithDecryption=True)
+print(response['Parameter']['Value'])
 
