@@ -9,7 +9,7 @@ app = Flask(__name__)
 def home():
     day_of_week = datetime.now().strftime('%A %d %B %Y')
     current_time = datetime.now().strftime('%H:%M:%S')
-    print ("Hello from backend-test")
+    return f"Hello from backend-test! Today is {day_of_week}"
 
 @app.route('/submit', methods=['POST'])
 def submit():
