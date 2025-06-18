@@ -1,8 +1,15 @@
 from flask import Flask, request, render_template, jsonify
 import json
 import os
+from datetime import datetime
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    day_of_week = datetime.now().strftime('%A %d %B %Y')
+    current_time = datetime.now().strftime('%H:%M:%S')
+    print ("Hello from backend-test")
 
 @app.route('/submit', methods=['POST'])
 def submit():
