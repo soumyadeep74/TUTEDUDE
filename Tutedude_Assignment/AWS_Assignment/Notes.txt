@@ -1,0 +1,16 @@
+ports used :-
+frontend - 3000
+backend - 5000
+
+IP's to access the application running :-
+
+ecs cluster ip : 3.110.140.251
+ec2 instance with both frontend & backend - 65.1.111.120
+ec2 instance with frontend & backend in differnt instance - 13.201.129.42(frontend) ; 13.204.75.248(backend)
+
+
+URL for application :-
+
+TASK-1 : 13.201.129.42:3000
+TASK-2 : 65.1.111.120:3000
+TASK-3 : 3.110.140.251:3000
