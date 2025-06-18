@@ -1,2 +1,0 @@
-Name: aaa, Email: qw@w.com, Password: 123
-Name: wttt, Email: dfg@e.com, Password: 12345
