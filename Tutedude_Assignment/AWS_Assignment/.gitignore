@@ -1,0 +1,10 @@
+# Node
+frontend/node_modules/
+backend/__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Docker
+*.log
