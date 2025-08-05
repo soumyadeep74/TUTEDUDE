@@ -17,5 +17,6 @@ spec:
       containers:
         - name: backend
           image: docker.io/soumyadeep74/k8s-backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
