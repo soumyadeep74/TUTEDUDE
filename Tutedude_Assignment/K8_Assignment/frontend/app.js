@@ -4,10 +4,10 @@ const fs = require('fs');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Frontend sees /api as local, which ingress maps to the backend
-const BACKEND_URL = 'http://localhost/api';
+// Use env var or fallback to localhost
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:5000';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
