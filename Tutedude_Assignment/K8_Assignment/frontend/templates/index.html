@@ -1,48 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Form</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up Form</title>
+  <link rel="stylesheet" href="/static/style.css" />
 </head>
-
 <body>
-    <p>Welcome to the Sign Up FORM!</p>
+  <p>Welcome to the Sign Up FORM!</p>
 
-    <div class="centered">
-        <form action="/api/submit" method="post">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="Enter your name:" required>
-            <br>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Enter your email:" required>
-            <br>
-            <label for="" password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password:" required>
-            <br>
-            <button type="submit">Submit</button>
-        </form>
-</body>
-<style>
+  <div class="centered">
+    <form action="/api/submit" method="post">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" placeholder="Enter your name:" required /><br />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Enter your email:" required /><br />
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Enter your password:" required /><br />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <br />
+    <button onclick="fetchData()">View Submissions</button>
+    <div id="dataDisplay"></div>
+  </div>
+
+  <script>
+    function fetchData() {
+      fetch('/api/view')
+        .then(response => response.json())
+        .then(data => {
+          const display = document.getElementById('dataDisplay');
+          if (data.entries) {
+            display.innerHTML = '<h3>Submitted Entries:</h3><ul>' +
+              data.entries.map(e => `<li>${e}</li>`).join('') +
+              '</ul>';
+          } else {
+            display.innerHTML = `<p style="color:red;">${data.error || 'No data available'}</p>`;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('dataDisplay').innerHTML = '<p style="color:red;">Error fetching data</p>';
+        });
+    }
+  </script>
+
+  <style>
     body {
-        font-family: Arial, sans-serif;
-        background-color: black;
-        color: yellow;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: yellow;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     p {
-        font-size: 18px;
-        margin: 10px 0;
+      font-size: 18px;
+      margin: 10px 0;
     }
-</style>
 
+    form {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      color: white;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</body>
 </html>
