@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 
 // Serve success page
 app.get('/submit-success', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'success.html'));
+    res.sendFile(path.join(__dirname, 'templates', 'success.html'));
 });
 
 app.listen(port, () => {
