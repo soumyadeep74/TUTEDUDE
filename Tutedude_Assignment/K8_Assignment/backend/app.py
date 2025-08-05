@@ -1,19 +1,27 @@
 from flask import Flask, request, render_template, jsonify
-import json
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
+
+# Optional: Enable CORS if frontend and backend are on different services
+try:
+    from flask_cors import CORS
+    CORS(app)
+except ImportError:
+    pass  # If not installed, it won’t crash
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    name = request.form['name']
-    email = request.form['email']
-    password = request.form['password']
+    # Use .get to avoid KeyError if form fields are missing
+    name = request.form.get('name', 'N/A')
+    email = request.form.get('email', 'N/A')
+    password = request.form.get('password', 'N/A')
 
     with open('names.txt', 'a') as f:
         f.write(f'Name: {name}, Email: {email}, Password: {password}\n')
 
-    return render_template('success.html')
+    # Render HTML template (ensure success.html is in templates/)
+    return render_template('success.html', name=name)
 
 @app.route('/view', methods=['GET'])
 def view():
@@ -25,4 +33,5 @@ def view():
         return jsonify({"error": "Data file not found"}), 404
 
 if __name__ == '__main__':
+    # Ensure app works both locally and in container
     app.run(host='0.0.0.0', port=5000, debug=True)
