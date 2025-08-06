@@ -1,4 +1,20 @@
-# PART-2 Flask + Express Deployment using Terraform
+
+# PART-1 Flask + Express Deployment on Single EC2 with Terraform
+
+This project provisions an EC2 instance using Terraform and deploys:
+- A **Flask backend** on port `5000`
+- An **Express frontend** on port `3000`
+
+## Steps to Deploy
+cd Part-1
+terraform init
+terraform apply 
+terraform destroy
+
+====================================================================
+
+
+# PART-2 Flask + Express Deployment on Two seprate EC2 using Terraform
 
 This project provisions two EC2 instances:
 
@@ -6,7 +22,7 @@ This project provisions two EC2 instances:
 - One runs an Express frontend (port 3000)
 
 ## Steps to Deploy
-
+cd Part-2
 ### 1. Create S3 and DynamoDB for Terraform backend
 
 ```bash
