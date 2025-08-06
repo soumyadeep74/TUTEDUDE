@@ -2,6 +2,7 @@
 # Update and install necessary packages
 sudo apt update -y
 sudo apt install -y python3-pip nodejs npm
+sudo pip3 install flask
 
 # Setup Flask backend
 mkdir -p /home/ubuntu/backend
