@@ -6,7 +6,7 @@ data "aws_iam_role" "ecs_task_execution_role" {
 }
 
 ##################################################
-# Create ecsTaskExecutionRole if not exists
+# Create ecsTaskExecutionRole if it doesn't exist
 ##################################################
 resource "aws_iam_role" "ecs_task_execution_role" {
   count = length(try([data.aws_iam_role.ecs_task_execution_role.name], [])) == 1 ? 0 : 1
@@ -16,7 +16,7 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect    = "Allow"
+      Effect = "Allow"
       Principal = {
         Service = "ecs-tasks.amazonaws.com"
       }
@@ -26,7 +26,7 @@ resource "aws_iam_role" "ecs_task_execution_role" {
 }
 
 ##################################################
-# Attach ECS task execution policy if role created
+# Attach ECS Task Execution Role Policy
 ##################################################
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
   count      = length(aws_iam_role.ecs_task_execution_role) == 0 ? 0 : 1
@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
 }
 
 ##################################################
-# Local variable for execution role ARN (existing or newly created)
+# Local variable for Execution Role ARN
 ##################################################
 locals {
   ecs_execution_role_arn = (
@@ -50,6 +50,43 @@ locals {
 ##################################################
 resource "aws_ecs_cluster" "main" {
   name = "flask-express-cluster"
+}
+
+##################################################
+# Security Group for ECS Tasks
+##################################################
+resource "aws_security_group" "ecs" {
+  name        = "ecs-security-group"
+  description = "Allow ALB access to ECS tasks"
+  vpc_id      = aws_vpc.main.id
+
+  # Allow ALB to access backend container
+  ingress {
+    from_port       = var.backend_port
+    to_port         = var.backend_port
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb.id]
+  }
+
+  # Allow ALB to access frontend container
+  ingress {
+    from_port       = var.frontend_port
+    to_port         = var.frontend_port
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb.id]
+  }
+
+  # Allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "ecs-tasks-sg"
+  }
 }
 
 ##################################################
@@ -111,8 +148,9 @@ resource "aws_ecs_service" "backend" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [aws_security_group.ecs.id]
-    subnets         = aws_subnet.public[*].id
+    subnets          = aws_subnet.public[*].id
+    security_groups  = [aws_security_group.ecs.id]
+    assign_public_ip = true  # ✅ Ensures internet access
   }
 
   load_balancer {
@@ -135,8 +173,9 @@ resource "aws_ecs_service" "frontend" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [aws_security_group.ecs.id]
-    subnets         = aws_subnet.public[*].id
+    subnets          = aws_subnet.public[*].id
+    security_groups  = [aws_security_group.ecs.id]
+    assign_public_ip = true  # ✅ Ensures internet access
   }
 
   load_balancer {

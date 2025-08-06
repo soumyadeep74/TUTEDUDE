@@ -42,3 +42,8 @@ variable "aws_account_id" {
   type        = string
   default     = "577165021148"
 }
+
+variable "vpc_endpoint_sg_name" {
+  description = "Name for the VPC endpoint security group"
+  default     = "vpc-endpoint-sg"
+}
