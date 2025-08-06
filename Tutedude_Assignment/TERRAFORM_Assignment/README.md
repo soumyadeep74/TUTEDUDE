@@ -8,6 +8,7 @@ This project provisions an EC2 instance using Terraform and deploys:
 ## Steps to Deploy
 cd Part-1
 terraform init
+terraform validate
 terraform apply 
 terraform destroy
 
@@ -26,13 +27,22 @@ cd Part-2
 ### 1. Create S3 and DynamoDB for Terraform backend
 
 ```bash
-cd remote
+cd remote_state
 terraform init
+terraform validate
 terraform apply
 
 ### 2. Terraform backend
 
 cd ..
 terraform init
+terraform validate
 terraform plan -out=infra.tfplan (linux) and terraform plan -out infra.tfplan (powershell)
 terraform apply infra.tfplan
+
+
+### 3. Delete all resource
+
+terraform destroy
+cd remote_state
+terraform destroy
