@@ -1,4 +1,8 @@
 **/node_modules/
 .env
 .venv
+
+# Terraform state and config
 variables.tf
+.terraform/
+.terraform.lock.hcl
